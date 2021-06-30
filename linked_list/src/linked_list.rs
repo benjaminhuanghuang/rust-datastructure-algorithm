@@ -22,55 +22,51 @@ impl<T> ListNode<T> {
 }
 
 pub struct LinkedList<T>{
-  count: u32,
-  first: Option<Rc<RefCell<ListNode<T>>>>,
-  last: Option<Rc<RefCell<ListNode<T>>>>
+  length: u32,
+  head: Option<Rc<RefCell<ListNode<T>>>>,
+  tail: Option<Rc<RefCell<ListNode<T>>>>
 }
 
 
-impl<T> DoublLinkedList<T> {
+impl<T> LinkedList<T> {
   pub fn new() -> Self {
-      DoublLinkedList {
-          count: 0,
-          first: None,
-          last: None,
+      LinkedList {
+          length: 0,
+          head: None,
+          tail: None,
       }
   }
 
-  pub fn list_count(&self) -> u32 {
-      self.count
+  pub fn get_length(&self) -> u32 {
+      self.length
   }
 
-  pub fn list_push(&mut self,value:T){
+  // add node to the end of the list
+  pub fn push(&mut self,value:T){
+    let node = ListNode::new(value);
+    match self.tail.take() {
+        Some(here) => old.borrow_mut().next = Some(node.clone()),
+        None => self.head = Some(node.clone()),
+    };
+    self.length += 1;
+    self.tail = Some(node);
+  }
+
+  // add node to the beginning of the list
+  pub fn unshift(&mut self, value:T){
       let node = ListNode::new(value);
-      if let Some(ref l) = self.last {
-          let mut n = node.borrow_mut();
-          n.next = Some(Rc::clone(&l));
-          if let Some(ref p) = l.borrow().prev {
-              n.prev = Some(Rc::clone(&p));
-              p.borrow_mut().next = Some(Rc::clone(&node));
-          };
-          l.borrow_mut().prev = Some(Rc::clone(&node));
+      node.borrow_mut().next = self.head.take();
+      match self.tail.take() {
+          Some(here) => self.tail = Some(here),
+          None => self.tail = Some(node),
       };
-      self.count++;
+      self.length += 1;
+      self.head = Some(node);
+
   }
 
-  pub fn list_unshift(&mut self, value:T){
-      let node = ListNode::new(value);
-      if let Some(ref f) = self.first {
-          let mut n = node.borrow_mut();
-          n.prev = Some(Rc::clone(&f));
-          if let Some(ref p) = f.borrow().next {
-              n.next = Some(Rc::clone(&p));
-              p.borrow_mut().prev = Some(Rc::clone(&node));
-          };
-          f.borrow_mut().next = Some(Rc::clone(&node));
-      };
-      self.count = self.count+1;
-  }
-
-  pub fn list_shift(&mut self) -> T {
-      if self.count == 0 {
+  pub fn shift(&mut self) -> T {
+      if self.length == 0 {
           panic!("No Items for pop!");
       }
       let mut value = 0;
@@ -89,13 +85,14 @@ impl<T> DoublLinkedList<T> {
       None
   }
 
-  pub fn list_pop(&mut self) -> T {
-      if self.count == 0 {
+  // remove node at the end the list
+  pub fn pop(&mut self) -> T {
+      if self.length == 0 {
           panic!("No Items for pop!");
       }
       let mut value = 0;
       let mut pointer_pnext = None;
-      if let Some(ref l) = self.last {
+      if let Some(ref l) = self.tail {
           if let Some(ref p) = l.borrow().prev {
               if let Some(ref pnext) = p.borrow().prev {
                   pointer_pnext = Some(Rc::clone(&pnext));
@@ -110,7 +107,7 @@ impl<T> DoublLinkedList<T> {
   }
 
   pub fn list_first(&self) -> T {
-      if self.count == 0 {
+      if self.length == 0 {
           panic!("No Items!");
       }
       let mut value = 0;
@@ -122,22 +119,16 @@ impl<T> DoublLinkedList<T> {
       value
   }
 
-  pub fn list_last(&self) -> Option<T> {
-      if self.count == 0 {
+  pub fn get_tail(&self) -> Option<T> {
+      if self.length == 0 {
           panic!("No Items!");
       }
-      let mut value = 0;
-      if let Some(ref l) = self.last {
-          if let Some(ref p) = l.borrow().prev {
-              value = p.borrow().value;
-          };
-      }
-      value
+      self.tail
   }
 
-  pub fn list_clear(&mut self){
-      while self.count > 0 {
-          self.list_pop();
+  pub fn clear(&mut self){
+      while self.length > 0 {
+          self.pop();
       }
   }
 
