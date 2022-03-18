@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "stack-rust"
+name = "stack_rust"
 version = "0.1.0"
