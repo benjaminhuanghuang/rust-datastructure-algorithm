@@ -1,4 +1,4 @@
-use stack::Stack;
+use stack_demo::Stack;
 
 fn main() {
   #[derive(PartialEq,Eq,Debug)]

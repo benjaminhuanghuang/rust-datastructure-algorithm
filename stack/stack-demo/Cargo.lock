@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "stack-demo"
+name = "stack_demo"
 version = "0.1.0"
