@@ -35,32 +35,61 @@ enum List {
 
 */
 
-pub struct LinkedList {
-  head: Link,
+pub struct LinkedList<T> {
+  head: Link<T>,
 }
 
-impl LinkedList {
-  fn empty() -> LinkedList {
+impl<T> LinkedList<T> {
+  fn empty() -> LinkedList<T> {
     LinkedList { head: None }
   }
 
-  fn push(&mut self, element: u32) {
-    match self.head {
-      None => {
-        self.head = Some(Box::new(LinkNode {
-          element,
-          next: None,
-        }))
-      }
-      Some(_) => {}
-    }
+  fn push(&mut self, element: T) {
+    //let old_head = std::mem::replace(&mut self.head, None);
+    // OR
+    let old_head = self.head.take();
+    let new_head = Box::new(LinkNode {
+      element,
+      next: old_head,
+    });
+
+    self.head = Some(new_head);
+
+    // match self.head {
+    //   None => {
+    //     self.head = Some(Box::new(LinkNode {
+    //       element,
+    //       next: None,
+    //     }))
+    //   }
+    //   Some(n) => {
+    //     let new_head = Some(Box::new(LinkNode {
+    //       element,
+    //       next: Some(n),
+    //     }));
+    //     self.head = new_head;
+    //   }
+    // }
+  }
+
+  fn pop(&mut self) -> Option<T> {
+    let old_head = self.head.take();
+    old_head.map(|n| {
+      self.head = n.next;
+      n.element
+    })
+  }
+
+  fn peak(&mut self) -> Option<&T> {
+    self.head.as_ref().map(|n| &n.element)
   }
 }
-struct LinkNode {
-  element: u32,
-  next: Link,
+
+struct LinkNode<T> {
+  element: T,
+  next: Link<T>,
 }
-type Link = Option<Box<LinkNode>>;
+type Link<T> = Option<Box<LinkNode<T>>>;
 
 #[cfg(test)]
 mod tests {
@@ -92,6 +121,7 @@ mod tests {
     };
 
     let mut l = LinkedList::empty();
-    l.push(4);
+    l.push(1);
+    l.push(2);
   }
 }
