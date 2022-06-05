@@ -1,7 +1,7 @@
 struct Node<T> {
   data: T,
-  next: Option<Rc<Node<T>>>,
-  prev: Option<Rc<Node<T>>>,
+  next: Option<Rc<RefCell<Node<T>>>>,
+  prev: Option<Rc<RefCell<Node<T>>>>,
 }
 
 #[cfg(test)]
