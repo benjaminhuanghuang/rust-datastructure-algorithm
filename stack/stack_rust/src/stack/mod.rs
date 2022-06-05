@@ -12,7 +12,6 @@ impl<T> Stack<T> {
     Stack { head: None }
   }
 
-
   pub fn push(&mut self, elem: T) {
     let new_node = Some(Box::new(Node {
       elem,
@@ -29,19 +28,16 @@ impl<T> Stack<T> {
   }
 
   pub fn peek(&mut self) -> Option<&T> {
-    self.head.as_ref().map(|node| {
-      &node.elem
-    })
+    self.head.as_ref().map(|node| &node.elem)
   }
 }
 
-
 #[cfg(test)]
-mod test{
+mod test {
   use super::Stack;
 
   #[test]
-  fn test_i32_operation(){
+  fn test_i32_operation() {
     let mut stack = Stack::new();
     stack.push(1);
     stack.push(2);
@@ -52,11 +48,11 @@ mod test{
 
     stack.push(5);
     stack.push(4);
-   assert_eq!(stack.peek(), Some(&4));
+    assert_eq!(stack.peek(), Some(&4));
   }
 
   #[test]
-  fn test_string_operation(){
+  fn test_string_operation() {
     let mut stack = Stack::new();
     stack.push("1");
     stack.push("2");
@@ -67,6 +63,6 @@ mod test{
 
     stack.push("5");
     stack.push("4");
-   assert_eq!(stack.peek(), Some(&"4"));
+    assert_eq!(stack.peek(), Some(&"4"));
   }
 }
