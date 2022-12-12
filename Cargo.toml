@@ -2,5 +2,6 @@
 members = [
   "hmap",
   "LinkedList\\linked-list-ryan",
+  "LinkedList\\double-linked-list-nyxtom",
   "rust-playground"
 ]

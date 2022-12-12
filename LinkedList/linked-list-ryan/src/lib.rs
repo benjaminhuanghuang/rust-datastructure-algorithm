@@ -101,29 +101,4 @@ mod tests {
     list.push(1);
     list.push(2);
   }
-  #[test]
-  fn node2_works() {
-    let node2 = &Node2::Empty;
-    let list = Node2::NonEmpty(32, node2);
-  }
-  #[test]
-  fn linked_list_works() {
-    let list = List::Link(Box::new(ListNode {
-      element: 1,
-      next: List::Empty,
-    }));
-  }
-  #[test]
-  fn link_works() {
-    let link = LinkedList {
-      head: Some(Box::new(LinkNode {
-        element: 1,
-        next: Link::None,
-      })),
-    };
-
-    let mut l = LinkedList::empty();
-    l.push(1);
-    l.push(2);
-  }
 }

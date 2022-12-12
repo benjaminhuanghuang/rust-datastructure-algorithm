@@ -3,6 +3,10 @@
 version = 3
 
 [[package]]
+name = "double-linked-list-nyxtom"
+version = "0.1.0"
+
+[[package]]
 name = "hmap"
 version = "0.1.0"
 
