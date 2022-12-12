@@ -2,7 +2,7 @@
 members = [
   "hmap",
   "LinkedList\\linked-list-ryan",
-  "LinkedList\\double-linked-list-nyxtom",
+  "DoubleLinkedList\\double-linked-list-nyxtom",
   "rust-playground",
   "lru_cache_nyxtom"
 ]
