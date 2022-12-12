@@ -27,14 +27,14 @@ impl<T: Copy> From<Node<T>> for Option<Rc<RefCell<Node<T>>>> {
 
 type NodePtr<T> = Rc<RefCell<Node<T>>>;
 
-pub struct List<T: Copy> {
+pub struct DoubleLinkedList<T: Copy> {
   head: Option<NodePtr<T>>,
   tail: Option<NodePtr<T>>,
 }
 
-impl<T: Copy> List<T> {
+impl<T: Copy> DoubleLinkedList<T> {
   pub fn new() -> Self {
-    List {
+    DoubleLinkedList {
       head: None,
       tail: None,
     }
@@ -118,7 +118,7 @@ impl<T: Copy> List<T> {
   }
 }
 
-impl<T: Copy> Drop for List<T> {
+impl<T: Copy> Drop for DoubleLinkedList<T> {
   fn drop(&mut self) {
     while let Some(_) = self.pop_back() {}
   }
@@ -130,7 +130,7 @@ mod tests {
 
   #[test]
   fn it_works() {
-    let mut list = List::new();
+    let mut list = DoubleLinkedList::new();
 
     list.push_back(1);
     list.push_back(2);
@@ -146,7 +146,7 @@ mod tests {
 
   #[test]
   fn it_works_front() {
-    let mut list = List::new();
+    let mut list = DoubleLinkedList::new();
 
     list.push_front(1);
     list.push_front(2);
