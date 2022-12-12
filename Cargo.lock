@@ -15,5 +15,9 @@ name = "linked-list-ryan"
 version = "0.1.0"
 
 [[package]]
+name = "lru_cache_nyxtom"
+version = "0.1.0"
+
+[[package]]
 name = "rust-playground"
 version = "0.1.0"
