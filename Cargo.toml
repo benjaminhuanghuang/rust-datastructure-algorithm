@@ -4,6 +4,6 @@ members = [
   "LinkedList\\linked-list-ryan",
   "DoubleLinkedList\\double-linked-list-nyxtom",
   "rust-playground",
-  "lru_cache_nyxtom",
-  "LRU_cache\\lru_cache_nyxtom"
+  "LRU_cache\\lru_cache_nyxtom",
+  "Trie\\trie_nyxtom"
 ]
