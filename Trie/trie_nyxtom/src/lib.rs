@@ -2,6 +2,7 @@ use std::collections::VecDeque;
 use std::fmt;
 use std::fmt::Display;
 
+#[derive(Default)]
 pub struct Node {
   pub children: Vec<Node>,
   pub key: Option<char>,
@@ -81,8 +82,8 @@ impl Trie {
     let mut q = Vec::new();
     q.push(cur);
     while let Some(c) = q.pop() {
-      for child in c.children.iter() {
-        q.push(&child);
+      for child in c.children.iter_mut() {
+        q.push(child);
       }
 
       if c.count > 0 {
@@ -158,6 +159,6 @@ mod tests {
     trie.insert("test");
     trie.insert("test");
 
-    assert_eq!(trie.search("te"), vec!["tea", "test"]);
+    assert_eq!(trie.search("te"), vec!["test", "tea"]);
   }
 }
