@@ -1,4 +1,5 @@
 use std::ptr::NonNull;
+use std::alloc;
 
 pub struct MyVec<T> {
   ptr: NonNull<T>,
@@ -14,6 +15,10 @@ impl<T> MyVec<T> {
       capacity: 0,
     }
   }
+
+ pub push(&mut self, value: T) {
+
+ }
 
   pub fn capacity(&self) -> usize {
     self.capacity
