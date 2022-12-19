@@ -25,3 +25,7 @@ version = "0.1.0"
 [[package]]
 name = "trie_nyxtom"
 version = "0.1.0"
+
+[[package]]
+name = "vec_ryan"
+version = "0.1.0"
